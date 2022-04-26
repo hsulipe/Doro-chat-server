@@ -1,5 +1,5 @@
-const useCase = require('../../../use-cases/hello-world')
+const useCase = require('../../../use-cases/hello-world');
 
 module.exports = (req, res) => {
-  res.send(useCase())
-}
+  res.send(useCase());
+};

@@ -4,6 +4,7 @@
   "description": "",
   "main": "./src/server/index.js",
   "scripts": {
+    "lint": "eslint",
     "start": "node ./src/server/index.js",
     "debug": "nodemon ./src/server/index.js",
     "test": "jest"
@@ -12,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "aws-sdk": "^2.1121.0",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
@@ -23,11 +25,16 @@
     "prettier": "^2.6.2"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
     "eslint-plugin-jest": "^26.1.5",
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",
     "http-status-codes": "^2.2.0",
-    "serverless-http": "^3.0.1"
+    "jsonwebtoken": "^8.5.1",
+    "serverless-http": "^3.0.1",
+    "socket.io": "^4.5.0",
+    "uuid": "^8.3.2",
+    "yup": "^0.32.11"
   }
 }

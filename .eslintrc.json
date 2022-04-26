@@ -1,20 +1,18 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true,
-        "jest": true
-    },
-    "extends": [
-        "standard",
-        "prettier"
-    ],
-    "plugins": [
-      "jest"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 13
-    },
-    "rules": {
-    }
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "standard", "prettier"],
+  "plugins": ["jest"],
+  "parserOptions": {
+    "ecmaVersion": 13
+  },
+  "rules": {
+    "quotes": ["error", "single"],
+    "semi-style": ["error", "last"],
+    "semi": ["error", "always"]
+  }
 }
