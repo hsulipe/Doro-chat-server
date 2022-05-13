@@ -1,11 +1,11 @@
-const httpStatusCodes = require("../../constants/http-status-codes");
-const BaseError = require("./base-error");
+const httpStatusCodes = require('http-status-codes');
+const BaseError = require('./base-error');
 
 class ValidationError extends BaseError {
   constructor(
     name,
     statusCode = httpStatusCodes.BAD_REQUEST,
-    description = "Bad Request."
+    description = 'Bad Request.'
   ) {
     super(name, statusCode, description);
   }

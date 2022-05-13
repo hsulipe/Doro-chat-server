@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="flex-container" style="display: flex; flex-direction: row;">
+    <div class="aside" id="rooms-container" style="display:inline-block; width:20vw; height:90vh; background-color:#E57E7E;">
+    </div>
+    <div id="msg-container" style="display:inline-block; width:80vw; height:90vh; background-color:#F7F7C6;">
+    </div>
+  </div>
+
+  <div class="footer">
+    <input type="text" id="text-box" style="width:30rem;"/>
+    <button type="submit" id="send-button">Send</button>
+  </div>
+
+  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+  <script>
+    const client = io('http://localhost:3000');
+    client.on('connect', () => {
+      const msgContainer = document.getElementById('msg-container')
+
+      const msg = document.createTextNode('Bem vindo');
+      const br = document.createElement('br');
+      msgContainer.appendChild(msg)
+      msgContainer.appendChild(br)
+    })
+
+    client.on('message', (message) => {
+      const msgContainer = document.getElementById('msg-container')
+      const msg = document.createTextNode(message.data.text);
+      const br = document.createElement('br');
+      msgContainer.appendChild(msg)
+      msgContainer.appendChild(br)
+    })
+
+    client.on('connection_success', (data) => {
+      const roomsContainer = document.getElementById('rooms-container');
+
+      for(const room of data.rooms) {
+        const channel = document.createElement('a');
+        const br = document.createElement('br');
+
+        channel.text = room.id;
+
+        roomsContainer.appendChild(channel);
+        roomsContainer.appendChild(br);
+      }
+    })
+
+    const sendButton = document.getElementById('send-button')
+    sendButton.addEventListener('click', () => {
+      client.emit('message', {data: { text: document.getElementById('text-box').value}})
+      document.getElementById('text-box').value = '';
+    })
+
+    document.addEventListener('keyup', (evt) =>{
+      if(evt.keyCode === 13) {
+        sendButton.click();
+      }
+    })
+  </script>
+</body>
+</html>
